@@ -1,0 +1,25 @@
+name: ContrabandAsker
+version: ${project.version}
+main: me.theminddroid.contrabandasker.ContrabandAsker
+api-version: "1.13"
+authors: [TheMindDroid]
+description: Gives player five seconds to hand over their contraband item.
+commands:
+  sword:
+    description: Gives player five seconds to hand over sword.
+    usage: /<command>
+  bow:
+    description: Gives player five seconds to hand over bow.
+    usage: /<command>
+  pot:
+    description: Gives player five seconds to hand over potion.
+    usage: /<command>
+  drug:
+    description: Gives player five seconds to hand over drugs.
+    usage: /<command>
+  arrow:
+    description: Gives player five seconds to hand over arrows.
+    usage: /<command>
+  out:
+    description: Gives player five seconds to leave a safe zone.
+    usage: /<command>
