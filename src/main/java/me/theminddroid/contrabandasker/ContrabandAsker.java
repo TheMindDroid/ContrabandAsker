@@ -10,6 +10,9 @@ public final class ContrabandAsker extends JavaPlugin {
     public void onEnable() {
         System.out.println("Contraband Asker is starting up...");
 
+        int pluginID = 8533;
+        Metrics metrics = new Metrics(this,pluginID);
+
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
@@ -20,8 +23,6 @@ public final class ContrabandAsker extends JavaPlugin {
         Objects.requireNonNull(getCommand("arrow")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("out")).setExecutor(new Commands());
     }
-
-
 
     @Override
     public void onDisable() {
