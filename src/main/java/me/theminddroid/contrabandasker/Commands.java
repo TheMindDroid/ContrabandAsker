@@ -15,6 +15,10 @@ import java.util.UUID;
 
 public class Commands implements CommandExecutor {
 
+    String title = ContrabandAsker.getPlugin(ContrabandAsker.class).getConfig().getString("Title");
+    String prefix = ContrabandAsker.getPlugin(ContrabandAsker.class).getConfig().getString("Prefix");
+    //ChatColor.translateAlternateColorCodes('&', "&3SAMPLE STRING")
+
     private static Set<UUID> cooldownSet;
 
     public Commands() {
@@ -109,33 +113,33 @@ public class Commands implements CommandExecutor {
                 }
 
                 if (contraband.equals("out")) {
-                    player.sendMessage(ChatColor.DARK_RED + "[ContrabandAsker]: " + ChatColor.DARK_AQUA + "You have asked " + ChatColor.GOLD
+                    player.sendMessage(ChatColor.DARK_RED + "[" + prefix + "]: " + ChatColor.DARK_AQUA + "You have asked " + ChatColor.GOLD
                             + target.getDisplayName() + ChatColor.DARK_AQUA
                             + " to leave the " + ChatColor.GOLD + "save zone" + ChatColor.DARK_AQUA + ". They have" + ChatColor.GOLD
                             + " 5 seconds" + ChatColor.DARK_AQUA + " to comply.");
 
-                    Bukkit.broadcast(ChatColor.DARK_RED + "[ContrabandAsker]: " + ChatColor.GOLD + player.getDisplayName()
+                    Bukkit.broadcast(ChatColor.DARK_RED + "[" + prefix + "]: " + ChatColor.GOLD + player.getDisplayName()
                             + ChatColor.DARK_AQUA + " has asked " + ChatColor.GOLD + target.getDisplayName() + ChatColor.DARK_AQUA
                             + " to leave the " + ChatColor.GOLD + "safe zone" + ChatColor.DARK_AQUA + ".", "ContrabandAsker.broadcast");
                 } else {
-                    player.sendMessage(ChatColor.DARK_RED + "[ContrabandAsker]: " + ChatColor.DARK_AQUA + "You have asked "
+                    player.sendMessage(ChatColor.DARK_RED + "[" + prefix + "]: " + ChatColor.DARK_AQUA + "You have asked "
                             + ChatColor.GOLD + target.getDisplayName() + ChatColor.DARK_AQUA + " to give up their "
                             + ChatColor.GOLD + contraband + ChatColor.DARK_AQUA + ". They have" + ChatColor.GOLD
                             + " 5 seconds" + ChatColor.DARK_AQUA + " to comply.");
 
-                    Bukkit.broadcast(ChatColor.DARK_RED + "[ContrabandAsker]: " + ChatColor.GOLD + player.getDisplayName()
+                    Bukkit.broadcast(ChatColor.DARK_RED + "[" + prefix + "]: " + ChatColor.GOLD + player.getDisplayName()
                             + ChatColor.DARK_AQUA + " has asked " + ChatColor.GOLD + target.getDisplayName() + ChatColor.DARK_AQUA
                             + " to hand over their " + ChatColor.GOLD + contraband + ChatColor.DARK_AQUA + ".", "ContrabandAsker.broadcast");
                 }
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 10.f, 1.7f);
-                target.sendTitle("§l§4ContrabandAsker", ChatColor.GOLD + player.getDisplayName() + ChatColor.DARK_AQUA
+                target.sendTitle("§l§4" + title, ChatColor.GOLD + player.getDisplayName() + ChatColor.DARK_AQUA
                         + displayedMessage, 10, 100, 10);
 
                 target.playSound(player.getLocation(), Sound.BLOCK_BELL_RESONATE, 10.f, 1.7f);
             }
 
             if (!target.isOnline()) {
-                player.sendMessage(ChatColor.DARK_RED + "[ContrabandAsker]: " + ChatColor.GOLD + target.getName() + ChatColor.DARK_AQUA
+                player.sendMessage(ChatColor.DARK_RED + "[" + prefix + "]: " + ChatColor.GOLD + target.getName() + ChatColor.DARK_AQUA
                         + " has logged off during the countdown. You may " + ChatColor.RED + "jail them " + ChatColor.DARK_AQUA
                         + "when they return.");
                 return;
@@ -143,7 +147,7 @@ public class Commands implements CommandExecutor {
 
             cooldownSet.add(target.getUniqueId());
             new cooldownRunnable(JavaPlugin.getProvidingPlugin(ContrabandAsker.class), target).runTaskLater(JavaPlugin.getProvidingPlugin(ContrabandAsker.class), 200);
-            new CountDown(target, player).startCountDown();
+            new CountDown(target, player, title, prefix).startCountDown();
         }
     }
 }

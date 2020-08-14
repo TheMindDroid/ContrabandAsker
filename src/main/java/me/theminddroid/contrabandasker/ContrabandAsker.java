@@ -9,6 +9,10 @@ public final class ContrabandAsker extends JavaPlugin {
     @Override
     public void onEnable() {
         System.out.println("Contraband Asker is starting up...");
+
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
         Objects.requireNonNull(getCommand("sword")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("bow")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("pot")).setExecutor(new Commands());
@@ -16,6 +20,8 @@ public final class ContrabandAsker extends JavaPlugin {
         Objects.requireNonNull(getCommand("arrow")).setExecutor(new Commands());
         Objects.requireNonNull(getCommand("out")).setExecutor(new Commands());
     }
+
+
 
     @Override
     public void onDisable() {

@@ -1,0 +1,4 @@
+#The title of the message sent to the player when their contraband is requested.
+Title: 'ContrabandAsker'
+#The prefix that appears in front of all ContrabandAsker chat messages.
+Prefix: 'ContrabandAsker'

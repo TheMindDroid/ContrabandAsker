@@ -10,10 +10,14 @@ public class CountDown {
     int time = 8;
     Player target;
     Player player;
+    String title;
+    String prefix;
 
-    CountDown (Player target, Player player) {
+    CountDown (Player target, Player player, String title, String prefix) {
         this.target = target;
         this.player = player;
+        this.title = title;
+        this.prefix = prefix;
     }
 
     public void startCountDown() {
@@ -22,7 +26,7 @@ public class CountDown {
             public void run() {
                 if (!target.isOnline()) {
                     cancel();
-                    player.sendMessage(ChatColor.DARK_RED + "[ContrabandAsker]: " + ChatColor.GOLD + target.getName() + ChatColor.DARK_AQUA
+                    player.sendMessage(ChatColor.DARK_RED + "[" + prefix + "]: " + ChatColor.GOLD + target.getName() + ChatColor.DARK_AQUA
                             + " has logged off during the countdown. You may " + ChatColor.RED + "jail them " + ChatColor.DARK_AQUA
                             + "when they return.");
                     return;
@@ -44,7 +48,7 @@ public class CountDown {
                     target.sendTitle("",ChatColor.DARK_AQUA + "Failure to comply will result in "
                             + ChatColor.GOLD + "jail time " + ChatColor.DARK_AQUA + "or " + ChatColor.RED + "death"
                             + ChatColor.DARK_AQUA + ".",0,80,5);
-                    player.sendMessage(ChatColor.DARK_RED + "[ContrabandAsker]: " + ChatColor.DARK_AQUA + "Time is up for "
+                    player.sendMessage(ChatColor.DARK_RED + "[" + prefix + "]: " + ChatColor.DARK_AQUA + "Time is up for "
                             + ChatColor.GOLD + target.getDisplayName() + ChatColor.DARK_AQUA
                             + ". If they have failed to comply you may " + ChatColor.GOLD + "jail" + ChatColor.DARK_AQUA + " or " + ChatColor.RED
                             + "kill" + ChatColor.DARK_AQUA + " them.");
